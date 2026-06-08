@@ -17,7 +17,7 @@ SCOPE = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/au
 
 try:
     # credentials.json file se authenticate kar rahe hain
-    creds = ServiceAccountCredentials.from_json_keyfile_name(r"C:\Users\BIKI\OneDrive\Desktop\backend\credentials.json", SCOPE)
+    creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", SCOPE)
     client = gspread.authorize(creds)
     
     # Apni Google Sheet ka naam yahan sahi se daalna
