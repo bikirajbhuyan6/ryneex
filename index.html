@@ -104,6 +104,130 @@
         <p class="text-gray-400 text-sm">Bank-Grade Security • Fast Processing • Student First</p>
         <p class="text-gray-500 text-xs mt-8">© 2026 Rynex. All rights reserved.</p>
     </footer>
+<!-- Background Overlay & Modal Container (Initially Hidden) -->
+<div id="loginModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center backdrop-blur-sm transition-opacity">
+    
+    <!-- Modal Box -->
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-8 relative transform transition-all scale-100">
+        
+        <!-- Close Button -->
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
 
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-extrabold text-gray-900">Welcome to Rynex</h3>
+            <p class="text-sm text-gray-500 mt-2">Enter your mobile number to get started.</p>
+        </div>
+
+        <!-- Step 1: Mobile Number Input -->
+        <div id="step-mobile">
+            <div class="relative">
+                <span class="absolute left-4 top-3.5 text-gray-500 font-medium">+91</span>
+                <input type="tel" id="mobileInput" placeholder="00000 00000" maxlength="10" 
+                    class="w-full pl-14 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none text-lg font-medium transition">
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="mt-4 flex items-start">
+                <input type="checkbox" id="terms" class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                <label for="terms" class="ml-2 text-xs text-gray-500">
+                    I agree to Rynex's <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> & <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>.
+                </label>
+            </div>
+
+            <button onclick="sendOTP()" class="w-full mt-6 bg-blue-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-md">
+                Send OTP
+            </button>
+        </div>
+
+        <!-- Step 2: OTP Input (Initially Hidden) -->
+        <div id="step-otp" class="hidden">
+            <p class="text-sm text-center text-gray-600 mb-4">
+                OTP sent to <span id="displayMobile" class="font-bold text-gray-900"></span> 
+                <button onclick="editNumber()" class="text-blue-600 ml-2 text-xs hover:underline">Edit</button>
+            </p>
+            
+            <div class="flex justify-between gap-2 mb-6">
+                <!-- 4 Digit OTP Inputs -->
+                <input type="text" maxlength="1" class="w-14 h-14 text-center text-2xl font-bold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none">
+                <input type="text" maxlength="1" class="w-14 h-14 text-center text-2xl font-bold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none">
+                <input type="text" maxlength="1" class="w-14 h-14 text-center text-2xl font-bold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none">
+                <input type="text" maxlength="1" class="w-14 h-14 text-center text-2xl font-bold border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none">
+            </div>
+
+            <button onclick="verifyOTP()" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-green-700 transition shadow-md">
+                Verify & Proceed
+            </button>
+
+            <p class="text-center text-sm text-gray-500 mt-4">
+                Didn't receive it? <span class="text-gray-400">Resend in 00:30</span>
+            </p>
+        </div>
+
+        <!-- Security Badge -->
+        <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-center gap-2 text-xs text-gray-500 font-medium">
+            <span>🔒</span> End-to-end encrypted
+        </div>
+        
+    </div>
+</div>
+
+<!-- JavaScript to handle Modal & Flow -->
+<script>
+    const modal = document.getElementById('loginModal');
+    const stepMobile = document.getElementById('step-mobile');
+    const stepOtp = document.getElementById('step-otp');
+    const mobileInput = document.getElementById('mobileInput');
+    const displayMobile = document.getElementById('displayMobile');
+
+    // Function to open Modal
+    function openModal() {
+        modal.classList.remove('hidden');
+        stepMobile.classList.remove('hidden');
+        stepOtp.classList.add('hidden');
+        mobileInput.value = '';
+    }
+
+    // Function to close Modal
+    function closeModal() {
+        modal.classList.add('hidden');
+    }
+
+    // Move to OTP Step
+    function sendOTP() {
+        const num = mobileInput.value;
+        if(num.length === 10) {
+            displayMobile.innerText = "+91 " + num;
+            stepMobile.classList.add('hidden');
+            stepOtp.classList.remove('hidden');
+        } else {
+            alert("Please enter a valid 10-digit mobile number.");
+        }
+    }
+
+    // Go back to edit number
+    function editNumber() {
+        stepOtp.classList.add('hidden');
+        stepMobile.classList.remove('hidden');
+    }
+
+    // Move to KYC/Dashboard
+    function verifyOTP() {
+        alert("Verification Successful! Redirecting to KYC Profile...");
+        closeModal();
+        // Here you will later add redirect logic: window.location.href = '/kyc-profile'
+    }
+
+    // Attach openModal to your "Apply Now" buttons in the landing page
+    document.querySelectorAll('a[href="#"], button').forEach(btn => {
+        if(btn.innerText.includes('Apply Now') || btn.innerText.includes('Login') || btn.innerText.includes('Check Your Limit')) {
+            btn.setAttribute('onclick', 'openModal(); return false;');
+        }
+    });
+</script>
 </body>
 </html>
