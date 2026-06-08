@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rynex Admin | Partner Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 text-white flex flex-col hidden md:flex">
+        <div class="h-16 flex items-center px-6 border-b border-gray-800">
+            <h1 class="text-2xl font-extrabold text-blue-500 tracking-tight">Rynex Admin</h1>
+        </div>
+        <nav class="flex-1 px-4 py-6 space-y-2">
+            <a href="#" class="flex items-center gap-3 bg-blue-600 px-4 py-3 rounded-lg text-sm font-semibold transition">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg text-sm font-semibold transition">
+                <span>👨‍🎓</span> Students
+            </a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg text-sm font-semibold transition">
+                <span>🏦</span> Lender APIs
+            </a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg text-sm font-semibold transition">
+                <span>💰</span> Payouts
+            </a>
+        </nav>
+        <div class="p-4 border-t border-gray-800">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center font-bold">B</div>
+                <div>
+                    <p class="text-sm font-bold">Bikiraj</p>
+                    <p class="text-xs text-gray-400">Super Admin</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto">
+        
+        <!-- Top Header -->
+        <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 lg:px-10 z-10">
+            <h2 class="text-xl font-bold text-gray-800">Overview Dashboard</h2>
+            <div class="flex items-center gap-4">
+                <span class="text-sm font-medium text-gray-500">June 8, 2026</span>
+                <button class="bg-blue-50 text-blue-600 px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-100 transition">Download Report</button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="p-6 lg:p-10 space-y-6">
+            
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <p class="text-sm text-gray-500 font-medium mb-1">Applications Today</p>
+                    <h3 class="text-3xl font-extrabold text-gray-900">142</h3>
+                    <p class="text-sm text-green-500 font-medium mt-2 flex items-center gap-1">↑ 12% vs yesterday</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <p class="text-sm text-gray-500 font-medium mb-1">Total Disbursed (Today)</p>
+                    <h3 class="text-3xl font-extrabold text-gray-900">₹3.2L</h3>
+                    <p class="text-sm text-green-500 font-medium mt-2 flex items-center gap-1">↑ 8% vs yesterday</p>
+                </div>
+                <!-- Card 3: Commission -->
+                <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-6 rounded-2xl shadow-md text-white">
+                    <p class="text-sm text-blue-100 font-medium mb-1">Your Commission (Earned)</p>
+                    <h3 class="text-3xl font-extrabold">₹6,400</h3>
+                    <p class="text-sm text-blue-200 font-medium mt-2">Ready for withdrawal</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <p class="text-sm text-gray-500 font-medium mb-1">Pending KYC</p>
+                    <h3 class="text-3xl font-extrabold text-gray-900">18</h3>
+                    <p class="text-sm text-orange-500 font-medium mt-2">Requires AI verification</p>
+                </div>
+            </div>
+
+            <!-- Recent Applications Table -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-gray-900">Live Applications</h3>
+                    <button class="text-sm text-blue-600 font-medium hover:underline">View All</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
+                                <th class="px-6 py-4 font-medium">Student Info</th>
+                                <th class="px-6 py-4 font-medium">College</th>
+                                <th class="px-6 py-4 font-medium">Amount</th>
+                                <th class="px-6 py-4 font-medium">Status</th>
+                                <th class="px-6 py-4 font-medium">Your Cut</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="px-6 py-4">
+                                    <p class="font-bold text-gray-900">Rahul Sharma</p>
+                                    <p class="text-xs text-gray-500">+91 98765 43210</p>
+                                </td>
+                                <td class="px-6 py-4 text-gray-600">IIT Bombay</td>
+                                <td class="px-6 py-4 font-bold text-gray-900">₹5,000</td>
+                                <td class="px-6 py-4">
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Disbursed</span>
+                                </td>
+                                <td class="px-6 py-4 font-bold text-blue-600">₹100</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="px-6 py-4">
+                                    <p class="font-bold text-gray-900">Aditi Verma</p>
+                                    <p class="text-xs text-gray-500">+91 87654 32109</p>
+                                </td>
+                                <td class="px-6 py-4 text-gray-600">Delhi University</td>
+                                <td class="px-6 py-4 font-bold text-gray-900">₹2,000</td>
+                                <td class="px-6 py-4">
+                                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-bold">Checking AI</span>
+                                </td>
+                                <td class="px-6 py-4 font-bold text-gray-400">--</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="px-6 py-4">
+                                    <p class="font-bold text-gray-900">Karan Patel</p>
+                                    <p class="text-xs text-gray-500">+91 76543 21098</p>
+                                </td>
+                                <td class="px-6 py-4 text-gray-600">NIFT Pune</td>
+                                <td class="px-6 py-4 font-bold text-gray-900">₹8,000</td>
+                                <td class="px-6 py-4">
+                                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">Rejected</span>
+                                </td>
+                                <td class="px-6 py-4 font-bold text-gray-400">₹0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>
