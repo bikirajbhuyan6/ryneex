@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rynex | My Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom slider styling */
+        input[type=range]::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #2563eb; /* Blue-600 */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 pb-10">
+
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-sm w-full py-4 px-4 sm:px-6 flex justify-between items-center sticky top-0 z-10">
+        <h1 class="text-2xl font-extrabold text-blue-600 tracking-tight">Rynex</h1>
+        <div class="flex items-center gap-3">
+            <span class="text-sm font-medium text-gray-700 hidden sm:block">Hi, Rahul</span>
+            <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold border border-blue-200">
+                R
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto mt-6 px-4 space-y-6">
+
+        <!-- Approved Limit Card (Premium Look) -->
+        <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
+            <!-- Decorative circle -->
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-white opacity-5 rounded-full"></div>
+            
+            <p class="text-gray-300 text-sm font-medium mb-1">Available Credit Limit</p>
+            <h2 class="text-4xl font-extrabold tracking-tight">₹10,000</h2>
+            
+            <div class="mt-6 flex justify-between items-end">
+                <div>
+                    <p class="text-xs text-gray-400">Status</p>
+                    <p class="text-sm font-semibold text-green-400 flex items-center gap-1">
+                        <span class="w-2 h-2 bg-green-400 rounded-full inline-block"></span> Active
+                    </p>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs text-gray-400">Powered by</p>
+                    <p class="text-sm font-semibold text-gray-300">RBI Reg. NBFC</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdrawal Section -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Get Cash Now</h3>
+            
+            <!-- Amount Display -->
+            <div class="text-center mb-6">
+                <p class="text-sm text-gray-500 font-medium">Select Amount</p>
+                <h4 class="text-4xl font-extrabold text-blue-600 mt-1" id="displayAmount">₹2,000</h4>
+            </div>
+
+            <!-- Custom Slider -->
+            <div class="mb-8">
+                <input type="range" id="amountSlider" min="500" max="10000" step="100" value="2000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                <div class="flex justify-between text-xs text-gray-400 font-medium mt-2">
+                    <span>₹500</span>
+                    <span>₹10,000</span>
+                </div>
+            </div>
+
+            <!-- Transparent Calculation -->
+            <div class="bg-gray-50 rounded-xl p-4 space-y-3 mb-6 border border-gray-100 text-sm">
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Loan Amount</span>
+                    <span class="font-semibold text-gray-900" id="calcPrincipal">₹2,000</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Processing Fee (incl. GST)</span>
+                    <span class="font-semibold text-red-500">- ₹118</span>
+                </div>
+                <hr class="border-gray-200">
+                <div class="flex justify-between text-base">
+                    <span class="font-bold text-gray-900">Transfer to Bank</span>
+                    <span class="font-bold text-green-600" id="calcTransfer">₹1,882</span>
+                </div>
+            </div>
+
+            <!-- Repayment Timeline -->
+            <div class="flex justify-between items-center bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6">
+                <div>
+                    <p class="text-xs text-blue-600 font-bold uppercase tracking-wide">Repayment Date</p>
+                    <p class="text-lg font-extrabold text-gray-900" id="dueDate">8 July 2026</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs text-blue-600 font-bold uppercase tracking-wide">You Pay</p>
+                    <p class="text-lg font-extrabold text-gray-900" id="calcRepay">₹2,060</p>
+                </div>
+            </div>
+
+            <!-- Bank Details & Submit -->
+            <button class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg">
+                Transfer to HDFC Bank ****1234
+            </button>
+            <p class="text-center text-xs text-gray-400 mt-4">By continuing, you accept the loan agreement.</p>
+        </div>
+
+    </main>
+
+    <!-- Interactive Logic -->
+    <script>
+        const slider = document.getElementById('amountSlider');
+        const displayAmount = document.getElementById('displayAmount');
+        const calcPrincipal = document.getElementById('calcPrincipal');
+        const calcTransfer = document.getElementById('calcTransfer');
+        const calcRepay = document.getElementById('calcRepay');
+        
+        // Let's assume a 3% flat fee for processing and 3% interest for 30 days
+        const procFeePercent = 0.03; 
+        const gstOnFee = 0.18;
+        const interestPercent = 0.03; 
+
+        function updateValues() {
+            const amount = parseInt(slider.value);
+            
+            // Format numbers to INR
+            const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
+            
+            // Calculations
+            const processingFeeBase = amount * procFeePercent;
+            const totalProcessingFee = processingFeeBase + (processingFeeBase * gstOnFee);
+            const transferAmount = amount - totalProcessingFee;
+            const repaymentAmount = amount + (amount * interestPercent);
+
+            // Update DOM
+            displayAmount.innerText = formatter.format(amount);
+            calcPrincipal.innerText = formatter.format(amount);
+            
+            // Update UI with calculated values
+            document.querySelector('.text-red-500').innerText = "- " + formatter.format(totalProcessingFee);
+            calcTransfer.innerText = formatter.format(transferAmount);
+            calcRepay.innerText = formatter.format(repaymentAmount);
+        }
+
+        // Listen for slider changes
+        slider.addEventListener('input', updateValues);
+        
+        // Initial call
+        updateValues();
+    </script>
+</body>
+</html>
